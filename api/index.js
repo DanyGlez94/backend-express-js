@@ -4,7 +4,7 @@ import cors from 'cors';
 import { errorHandler, logErrors, boomErrorHandler } from './middlewares/error.handler.js';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -20,11 +20,13 @@ const corsOptions = {
 };
 app.use(cors());
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
+app.get('/api', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/new_endpoint', (req, res) => {
+app.get('/api/new_endpoint', (req, res) => {
   res.send('New endpoint!');
 });
 
@@ -38,3 +40,5 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+export default app;
