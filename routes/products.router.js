@@ -59,10 +59,14 @@ router.patch(
   },
 );
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const product = await service.delete(id);
-  res.json(product);
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await service.delete(id);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;

@@ -12,7 +12,7 @@ class ProductsService {
     for (let i = 0; i < limit; i++) {
       this.products.push({
         id: faker.string.uuid(),
-        name: faker.person.fullName(),
+        name: faker.commerce.productName(),
         price: parseInt(
           faker.commerce.price({
             min: 1000,
